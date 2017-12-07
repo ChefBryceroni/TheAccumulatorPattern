@@ -27,8 +27,8 @@ import rosegraphics as rg
 # ----------------------------------------------------------------------
 def main():
     """ Calls the   TEST   functions in this module. """
-    run_test_draw_squares_from_circle()
-    run_test_draw_circles_from_rectangle()
+    #run_test_draw_squares_from_circle()
+    #run_test_draw_circles_from_rectangle()
     run_test_draw_lines_from_rectangles()
 
 
@@ -342,8 +342,29 @@ def draw_lines_from_rectangles(rectangle1, rectangle2, n, window):
     #          ** FIRST DO A CONCRETE EXAMPLE BY HAND! **
     ####################################################################
     # ------------------------------------------------------------------
+    rectangle1.attach_to(window)
+    rectangle2.attach_to(window)
+    window.render()
 
+    center1 = rectangle1.get_center()
+    center2 = rectangle2.get_center()
+    width1 = rectangle1.get_width()
+    height1 = rectangle1.get_height()
+    count = 0
+    for k in range(n):
+        line1 = rg.Line(rg.Point(center1.x - (width1/2) * k, center1.y +
+                                 (height1/2) * k), rg.Point(center2.x - (
+            width1/2) * k, center2.y + (height1/2) * k))
+        line1.thickness = 5
 
+        if count % 2 == 0:
+            line1.color = rectangle1.outline_color
+        else:
+            line1.color = rectangle2.outline_color
+
+        count = count + 1
+        line1.attach_to(window)
+        window.render()
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # ----------------------------------------------------------------------
